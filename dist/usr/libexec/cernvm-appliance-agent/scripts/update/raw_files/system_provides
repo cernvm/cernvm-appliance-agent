@@ -1,0 +1,12 @@
+libxcb-composite.so.0  
+gck-roots-store-standalone.so()(64bit)  
+/etc/pam.d/smtp  
+pygtk2-doc = 2.16.0-3.el6
+ati_drv.so()(64bit)  
+config(lohit-gujarati-fonts) = 2.4.4-4.el6
+pkgconfig(xfixes) = 5.0
+libpulsedsp.so()(64bit)
+xmlgraphics-commons = 0:1.3.1-1.1.el6
+xlock = 4.0
+xscreen = 3.0
+gck-roots-store-standalone.so()(64bit)

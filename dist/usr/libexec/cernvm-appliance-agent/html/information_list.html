@@ -1,0 +1,157 @@
+<script language="javascript" type="text/javascript">
+ 
+$(document).ready(function(){
+  initialise();
+});
+
+function getMemoryInfo(usage) {
+    //stab TODO
+     //var usage =   Math.floor((Math.random()*100));
+     var msg = "Mem usage: " + usage + "%";
+     html = generateCriticalMessage(usage, msg);  
+     $('#li_memory').html(html);
+    
+    
+    setTimeout(function() {getResponse('/cgi-bin/toolkit/live_info.py?cmd=mem', getMemoryInfo)}, 5000);        
+}
+
+function getSwapInfo(usage) {
+    //stab TODO
+     //var usage =   Math.floor((Math.random()*100));
+     var usg = 0;
+     if (usage > 0) {
+        usg=usage*10;
+     }
+     var msg = "Swap usage: " + usage + "%";
+     if (usage < 0) {
+        msg = "No swap space";
+	    usg=0;
+     }
+     html = generateCriticalMessage(usg, msg);  
+     $('#li_swap').html(html);
+    
+    if (usage >= 0)
+    	setTimeout(function() {getResponse('/cgi-bin/toolkit/live_info.py?cmd=swap',
+                    getSwapInfo)}, 15000);        
+}
+function getHardDiskInfo(usage) {
+    //stab TODO
+    //var usage =   Math.floor((Math.random()*100)); 
+    var msg = "Disk usage: " + usage + "%";
+    html = generateCriticalMessage(usage, msg); 
+    $('#li_hard_drive').html(html);
+    setTimeout(function() {
+                getResponse('/cgi-bin/toolkit/live_info.py?cmd=disk'
+                ,getHardDiskInfo)}, 10000); 
+}
+
+function getUpdateCheck(info) {
+    var html = ''
+    if (info == 'True')
+    {
+        html = generateCriticalMessage(86, "<h8>Updates available</h8>");
+    }
+    else
+        html = generateCriticalMessage(0, "<h8>System is up to date</h8>");
+
+    $('#li_update').html(html);
+    setTimeout(function() {getResponse('/cgi-bin/toolkit/live_info.py?cmd=update',
+                 getUpdateCheck)}, 60000);	
+}
+
+function generateCriticalMessage(usage, msg) {
+
+    var span = "badge badge-success";
+    if (usage >= 95)
+    {
+        span = "badge badge-important";
+    }
+    else if (usage >= 85) {
+        span="badge badge-warning";
+    }
+    var html = '<span class="'+span+'">' + msg +
+    '</span>';
+    return html; 
+}
+
+function getResponse(url, method_call) {
+
+    var result = null;
+
+    $.ajax({
+        url: url,
+        type: 'get',
+        dataType: 'xml',
+        async: true	,
+        success: function(data) {
+            result = data;
+	        var xmlDoc = result,
+            $xml = $( xmlDoc ),
+            $title = $xml.find("response");
+            	value = $title.text();
+	        method_call(value);	
+        } 
+    });
+    
+    //return value;
+}
+  
+
+function getKernelInfo(info) {
+    //stab TODO
+    var html='<span class="badge badge-info">\nKernel: <br><h7>\n'+
+    info+'</h7> '+'\n</span>\n';
+    $('#li_kernel').html(html);
+    
+}   
+	
+function getHostnameInfo(info) {
+    //stab TODO
+
+    html='<span class="badge badge-info">\nHostname: <br>'+
+    info+'\n</span>\n';
+    $('#li_hostname').html(html);
+}
+
+function initialise()
+{
+    getMemoryInfo('...');
+    getHardDiskInfo('...');
+    getResponse('/cgi-bin/toolkit/live_info.py?cmd=kernel', getKernelInfo);
+    getResponse('/cgi-bin/toolkit/live_info.py?cmd=hostname',
+        getHostnameInfo);
+    getResponse('/cgi-bin/toolkit/live_info.py?cmd=update', getUpdateCheck);
+    getResponse('/cgi-bin/toolkit/live_info.py?cmd=swap', getSwapInfo);
+}
+
+</script>
+<script type="text/javascript">
+function submit_function(element) {
+    
+     var url='/cgi-bin/toolkit/live_info.py?cmd=edit_service&param1='+element.id;
+     var param2='off';
+     if (element.checked)
+     {
+        param2='on';
+     }
+     url+='&param2=' + param2;   
+     var info=getResponse(url);
+}
+</script>
+<div class="span4">
+<div class="well" style="padding: 8px 0;">   
+    <ul class="nav nav-list">
+        <li class="nav-header">Information</li>
+        <li class="divider"></li>
+        <li id="li_kernel">Kernel: </li></br>
+        <li id="li_hostname">Hostname: </li>
+        <li class="divider"></li>
+        <li id="li_memory">Memory: </li>
+        <li id="li_swap">Swap: </li>
+        <li class="divider"></li>
+        <li id="li_hard_drive">Hard Drive: </li>
+        <li class="divider"></li>
+        <li id="li_update">Update</li>
+    </ul>
+</div>
+</div>
