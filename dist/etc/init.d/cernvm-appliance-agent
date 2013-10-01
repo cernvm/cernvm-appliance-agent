@@ -12,7 +12,7 @@
 # Provides:          cernvm-appliance-agent
 # Required-Start:    $network $local_fs $remote_fs 
 # Required-Stop:     
-# Default-Start:     3 4 5
+# Default-Start:     5
 # Default-Stop:      0 1 6
 # X-Interactive: true
 # Short-Description: Start update sync in boot, act and then die
@@ -24,9 +24,11 @@ start() {
         echo -n "Starting cern-vm appliance agent"
         [ -d '/var/log/cernvm-appliance-agent' ] || {
             mkdir -p /var/log/cernvm-appliance-agent
+            chown cernvm-appliance-agent /var/log/cernvm-appliance-agent
         }
         [ -f '/var/log/cernvm-appliance-agent/service.log' ] || {
             touch /var/log/cernvm-appliance-agent/service.log
+            chown cernvm-appliance-agent /var/log/cernvm-appliance-agent/service.log
         }
         $httpd_BIN -f "$CONFIG_FILE" -k start 2>/var/log/cernvm-appliance-agent/service.log
         if [ $? -eq 0 ]; then

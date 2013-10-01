@@ -106,14 +106,14 @@ class CronJob(object):
             
             if len(dash_elements) > 1:
                 msg+= ' to ' + DAYS[int(dash_elements[0])]
-            elif not (elements.index(element) == (len(elements) - 1))      
+            elif not (elements.index(element) == (len(elements) - 1)):
                 msg+=','
         
         return message
     
             
     def cronMessageParser(self):
-        msg = "Command " + self.command " is set to be run on: " + self.newline
+        msg = "Command " + self.command + " is set to be run on: " + self.newline
         msg += self._minute(self['minute']) + self.newline
         msg += self._hour(self['hour']) + self.newline
         msg += self._day_of_month(self['day_of_month']) + self.newline

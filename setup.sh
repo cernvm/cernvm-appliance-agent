@@ -1,10 +1,10 @@
 #!/bin/bash
-#Version 0.1
+#Version 0.2
 #Description setup tool for the cernvm-appliance-agent
 #Author: Vasilis Nicolaou
 #Copyright (c) CERN 2013
 #All rights reserved
-VERSION=0.1
+VERSION=0.2
 APPLICATION_PATH="usr/libexec/cernvm-appliance-agent"
 SERVICE_PATH="etc/init.d/cernvm-appliance-agent"
 ETC_PATH="etc/cernvm-appliance-agent"
