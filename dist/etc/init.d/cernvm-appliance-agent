@@ -98,7 +98,7 @@ test -x $httpd_BIN || {
     reload)
 
         ## Otherwise if it does not support reload:
-        return 3
+        exit 3
         ;;
     status)
         echo -n "Checking for service $0: "
