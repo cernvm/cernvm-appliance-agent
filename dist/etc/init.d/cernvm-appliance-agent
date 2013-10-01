@@ -30,6 +30,10 @@ start() {
             touch /var/log/cernvm-appliance-agent/service.log
             chown cernvm-appliance-agent /var/log/cernvm-appliance-agent/service.log
         }
+	[ -d '/var/lib/cernvm-appliance-agent' ] || {
+            mkdir -p /var/lib/cernvm-appliance-agent
+            chown cernvm-appliance-agent /var/lib/cernvm-appliance-agent
+        }
         $httpd_BIN -f "$CONFIG_FILE" -k start 2>/var/log/cernvm-appliance-agent/service.log
         if [ $? -eq 0 ]; then
             echo_success

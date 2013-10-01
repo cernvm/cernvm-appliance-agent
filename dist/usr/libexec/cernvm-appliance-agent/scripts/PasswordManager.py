@@ -73,6 +73,7 @@ class PasswordManager(object):
         output, _ = sp.communicate()
 	
         sp.wait() 
+        open('/var/lib/cernvm-appliance-agent/password_set', 'a').close()
 		
     def _check(self):
  
