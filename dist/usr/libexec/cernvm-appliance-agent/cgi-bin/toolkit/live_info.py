@@ -44,7 +44,7 @@ def swapUsage():
     return 100 - int((float(free)/float(total))*100)
 
 def getKernelVersion():
-    command='uname -r'
+    command='uname -r | sed "s,.cernvm.x86_64, / cernvm,"'
     return execute(command)[0]
 
 def hostname():

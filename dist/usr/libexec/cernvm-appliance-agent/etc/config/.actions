@@ -6,7 +6,8 @@
             <id>System Information</id>
             <url>/cgi-bin/toolkit/main.py?page=System+Information</url>
             <command-group id="1">
-            <command  title="Kernel">uname -sr</command>
+            <command title="CernVM">cat /etc/cernvm-release</command>
+            <command title="Kernel">uname -sr</command>
             <command title="Host name">uname -n</command>
             <command title="CPU">cat /proc/cpuinfo | grep "model name" | head -n 1 | cut -d : -f 2</command>
             </command-group>
@@ -32,7 +33,7 @@
             <id>Available Packages</id>
             <url>/cgi-bin/toolkit/main.py?page=Available+Packages</url>
             <command-group id="1">
-            <command title="Packages" format="table">echo "Package"; rpm -qa</command>
+            <command title="Packages" format="table">echo "Package"; rpm -qa | sort --ignore-case</command>
             </command-group>
         </action>
         

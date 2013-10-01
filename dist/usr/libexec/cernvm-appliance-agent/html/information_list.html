@@ -52,7 +52,7 @@ function getUpdateCheck(info) {
         html = generateCriticalMessage(86, "<h8>Updates available</h8>");
     }
     else
-        html = generateCriticalMessage(0, "<h8>System is up to date</h8>");
+        html = generateCriticalMessage(0, "<h8>System up to date</h8>");
 
     $('#li_update').html(html);
     setTimeout(function() {getResponse('/cgi-bin/toolkit/live_info.py?cmd=update',
