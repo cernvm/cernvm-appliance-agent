@@ -68,7 +68,7 @@ def update_check_with_version():
     return [response == NEW_UPDATE, a[0]]
 
 def turn_service(service_name, turn):
-    command='sudo chkconfig --level 3 ' + service_name + ' ' + turn    
+    command='sudo chkconfig ' + service_name + ' ' + turn    
     a=execute(command)
     
     return a[1]
