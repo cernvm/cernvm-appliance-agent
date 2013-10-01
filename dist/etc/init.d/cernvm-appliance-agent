@@ -34,6 +34,10 @@ start() {
             mkdir -p /var/lib/cernvm-appliance-agent
             chown cernvm-appliance-agent /var/lib/cernvm-appliance-agent
         }
+	[ -f /var/lib/cernvm-appliance-agent/password_set ] && {
+	    rm -f /etc/cernvm-appliance-agent/conf.d/localhost.listen
+            ln -fs listen/all.listen /etc/cernvm-appliance-agent/conf.d/all.listen
+        }
         $httpd_BIN -f "$CONFIG_FILE" -k start 2>/var/log/cernvm-appliance-agent/service.log
         if [ $? -eq 0 ]; then
             echo_success
