@@ -24,7 +24,7 @@ function getSwapInfo(usage) {
      }
      var msg = "Swap usage: " + usage + "%";
      if (usage < 0) {
-        msg = "No swap space";
+        msg = "Not swapping";
 	    usg=0;
      }
      html = generateCriticalMessage(usg, msg);  
@@ -108,7 +108,7 @@ function getKernelInfo(info) {
 function getHostnameInfo(info) {
     //stab TODO
 
-    html='<span class="badge badge-info">\nHostname: <br>'+
+    html='<span class="badge badge-info">\nIP Address: <br>'+
     info+'\n</span>\n';
     $('#li_hostname').html(html);
 }
@@ -132,7 +132,7 @@ function submit_function(element) {
      var param2='off';
      if (element.checked)
      {
-        param2='on';
+        param2='reset';
      }
      url+='&param2=' + param2;   
      var info=getResponse(url);

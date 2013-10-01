@@ -50,8 +50,7 @@ class Service(object):
                     row+=', '    
                 row+=str(counter)
                 first+=1    
-                if counter == 3:
-                    self.enabled = True
+                self.enabled = True
             counter+=1
         row+='\n</td>\n'
         row+='\n<td>\n'
@@ -111,7 +110,7 @@ class ServiceManager(object):
         div+='<th>Enabled</th>\n'
         div+='</tr>\n'
         
-        for service in self.services:
+        for service in sorted(self.services, key=str.lower):
             div+=self.services[service].view
 
         div+='</table>\n'
