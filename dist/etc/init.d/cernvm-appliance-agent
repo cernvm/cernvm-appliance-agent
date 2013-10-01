@@ -95,8 +95,7 @@ test -x $httpd_BIN || {
         exit 3
         ;;
     restart)
-        # Stop the service and regardless of whether it was
-        # running or not, start it again.
+        [ ! -f "/var/run/cernvm-appliance-agent.pid" ] && exit 0
         $0 stop
         $0 start
         exit "$?"
