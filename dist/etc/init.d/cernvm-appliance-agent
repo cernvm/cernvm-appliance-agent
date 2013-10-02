@@ -21,7 +21,7 @@
 
 . /etc/init.d/functions 
 start() {
-        echo -n "Starting cern-vm appliance agent"
+        echo -n "Starting CernVM Appliance Agent"
         [ -d '/var/log/cernvm-appliance-agent' ] || {
             mkdir -p /var/log/cernvm-appliance-agent
             chown cernvm-appliance-agent /var/log/cernvm-appliance-agent
@@ -36,7 +36,7 @@ start() {
         }
 	[ -f /var/lib/cernvm-appliance-agent/password_set ] && {
 	    rm -f /etc/cernvm-appliance-agent/conf.d/*.listen
-            ln -s listen.d/all.listen /etc/cernvm-appliance-agent/conf.d/all.listen
+            ln -s listen.d/all.listen /etc/cernvm-appliance-agent/conf.d/default.listen
         }
         $httpd_BIN -f "$CONFIG_FILE" -k start 2>/var/log/cernvm-appliance-agent/service.log
         if [ $? -eq 0 ]; then
@@ -49,7 +49,7 @@ start() {
 }
 
 stop() {
-        echo -n "Stopping cern-vm appliance agent "
+        echo -n "Stopping CernVM Appliance Agent "
         if [ ! -f /var/run/cernvm-appliance-agent.pid ]; then
             echo "Service is not running"
             echo_failure
