@@ -37,11 +37,11 @@ class View(object):
                 self.menu.addItem(MenuItem(actions[action].title, actions[action].url))
             else:
                 self.nav_bar.addItem(MenuItem(actions[action].title, actions[action].url))
-        self.title='CERN-VM'
+        self.title='CernVM'
         self.titlespan=24
         self.listspan=4
         self.contentspan=16
-        self.setContent('Welcome', 'This is the web interface of the CERN-VM')
+        self.setContent('Welcome', 'This is the web interface of the CernVM')
         
     def setContent(self, title, content):
         '''
@@ -75,7 +75,7 @@ class View(object):
         '</center></footer>' 
     
     def _view(self):
-        self.mainhtml=createHeader('CERN-VM', 16, self._createNavBar())+\
+        self.mainhtml=createHeader('CernVM', 16, self._createNavBar())+\
         contain([self._leftListView(),\
          self._mainWindow(), self._rightListView()])#, self._footer()])
 
