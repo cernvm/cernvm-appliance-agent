@@ -54,7 +54,7 @@ def hostname():
 def update_check():
     command = 'cernvm-update -c'
     a=execute(command)
-    return a[1] == NEW_UPDATE
+    return a[1] != NO_ACTION
 
 def response(msg):
     element=ET.Element('response')
