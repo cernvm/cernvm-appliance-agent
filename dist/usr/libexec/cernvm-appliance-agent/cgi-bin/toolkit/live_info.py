@@ -65,7 +65,7 @@ def update_check_with_version():
     command = 'cernvm-update -c'
     a=execute(command)
     response=a[1]
-    return [response == NEW_UPDATE, a[0]]
+    return [response != NO_ACTION, a[0]]
 
 def turn_service(service_name, turn):
     command='sudo chkconfig ' + service_name + ' ' + turn    

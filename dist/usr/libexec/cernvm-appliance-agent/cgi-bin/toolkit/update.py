@@ -28,7 +28,7 @@ class UpdateManager(object):
         div=createDiv(button_bar, divClass='form-actions')
         update_info=update_check_with_version()
         if update_info[0]:
-            return 'Updates are available<br>' + div 
+            return 'Updates are available<br>Please run "sudo cvmfs-update -a"' #+ div 
         else:
             return '<h3>System is up to date</h3><br>Version: ' + update_info[1]
 
